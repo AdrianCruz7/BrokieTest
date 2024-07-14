@@ -16,6 +16,8 @@ public class Waypoints : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.gamePaused) return;
+
         if (transform.position == CurrentTarget.position)
         {
 

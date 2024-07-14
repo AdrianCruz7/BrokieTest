@@ -12,6 +12,8 @@ public class Damage : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.gamePaused) return;
+
         if (startTimer)
         {
             timer -= Time.deltaTime;
@@ -26,7 +28,8 @@ public class Damage : MonoBehaviour
     {
         if(other.transform.tag == "Player")
         {
-            other.GetComponent<Health>().TakeDamage(damage);
+            //other.GetComponent<Health>().TakeDamage(damage);
+            GameManager.Instance.SignalPlayerDamaged(damage);
             startTimer = true;
         }
     }
@@ -35,7 +38,8 @@ public class Damage : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            other.GetComponent<Health>().TakeDamage(damage);
+            //other.GetComponent<Health>().TakeDamage(damage);
+            GameManager.Instance.SignalPlayerDamaged(damage);
         }
     }
 
