@@ -22,7 +22,6 @@ public class Waypoints : MonoBehaviour
         {
 
             SwitchPoint();
-            //Debug.Log("here");
         }
         else
         {

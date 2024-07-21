@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    private float damage = 1f;
-    private float damageTimer = .5f;
-    private float timer = 1f;
+    [SerializeField] float damage = 1f;
+    [SerializeField] float damageTimer = .5f;
+    [SerializeField] float timer = 1f;
     private bool startTimer = false;
 
     private void Update()
@@ -29,7 +29,7 @@ public class Damage : MonoBehaviour
         if(other.transform.tag == "Player")
         {
             //other.GetComponent<Health>().TakeDamage(damage);
-            GameManager.Instance.SignalPlayerDamaged(damage);
+            GameManager.Instance.SignalPlayerHealthChange(-damage);
             startTimer = true;
         }
     }
@@ -39,7 +39,7 @@ public class Damage : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             //other.GetComponent<Health>().TakeDamage(damage);
-            GameManager.Instance.SignalPlayerDamaged(damage);
+            GameManager.Instance.SignalPlayerHealthChange(-damage);
         }
     }
 

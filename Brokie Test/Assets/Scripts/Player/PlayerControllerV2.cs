@@ -41,8 +41,9 @@ public class PlayerControllerV2 : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = new Vector3(playerDirection.x, 0, playerDirection.y);
-        if (canJump) rb.AddForce(movement * playerMovementSpeed);
-        else rb.AddForce(movement * (playerMovementSpeed / 2.5f));
+        /*if (canJump) rb.AddForce(movement * playerMovementSpeed);
+        else rb.AddForce(movement * (playerMovementSpeed / 2.5f));*/
+        rb.AddForce(movement * playerMovementSpeed);
 
         if (rb.velocity.magnitude > playerMaxMovementSpeed) rb.velocity = rb.velocity.normalized * playerMaxMovementSpeed;
     }

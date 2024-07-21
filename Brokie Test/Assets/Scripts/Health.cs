@@ -9,42 +9,45 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public float health = 100;
+    [SerializeField] float maxHealth = 100;
+    [SerializeField] float currentHealth = 50;
     [SerializeField] private Transform respawnPoint;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] Slider healthBar;
-    
 
     private void Awake()
     {
-        healthBar.maxValue = health;
+        healthBar.maxValue = maxHealth;
         SetHealthBar();
     }
 
     private void Start()
     {
-        GameManager.Instance.PlayerDamaged += TakeDamage;
+        GameManager.Instance.PlayerHealthChange += DamageAndHeal;
     }
 
     public void SetHealthBar()
     {
-        healthBar.value = health;
+        healthBar.value = currentHealth;
     }
 
-    public void TakeDamage(float damage)
+    public void DamageAndHeal(float damage)
     {
-        health -= damage;
+        currentHealth += damage;
         SetHealthBar();
     }
 
     private void Update()
     {
-        //healthText.text = health.ToString();
-        if(health <= 0)
+        if(currentHealth <= 0)
         {
             Respawn();
-            health = 100;
+            currentHealth = 100;
             SetHealthBar();
+        } else if (currentHealth > maxHealth)
+        {
+            healthBar.value = currentHealth;
+            currentHealth = maxHealth;
         }
     }
 

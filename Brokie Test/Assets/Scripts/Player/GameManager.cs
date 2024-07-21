@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public bool gamePaused = false;
 
-    public event Action<float> PlayerDamaged;
+    public event Action<float> PlayerHealthChange;
 
     private void Awake()
     {
@@ -38,8 +38,9 @@ public class GameManager : MonoBehaviour
         //Debug.Log(gamePaused);
     }
 
-    public void SignalPlayerDamaged(float damage)
+    public void SignalPlayerHealthChange(float damage)
     {
-        PlayerDamaged.Invoke(damage);
+        PlayerHealthChange.Invoke(damage);
     }
+
 }
